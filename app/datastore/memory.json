@@ -1,0 +1,19 @@
+{
+  "f162ab63-a5d6-401a-aceb-8f26cbfbcee1": {
+    "id": "f162ab63-a5d6-401a-aceb-8f26cbfbcee1",
+    "timestamp": 1747614705.199917,
+    "date": "2025-05-18 17:31:45",
+    "original_prompt": "A floating crystal city in the clouds",
+    "enhanced_prompt": "A floating crystal city in the clouds, with realistic material textures, featuring realistic wear patterns, hyperdetailed, high dynamic range, professional photography",
+    "image_path": "datastore/images/img_f162ab63-a5d6-401a-aceb-8f26cbfbcee1_20250518173145.png",
+    "model_path": "datastore/models/model_f162ab63-a5d6-401a-aceb-8f26cbfbcee1_20250518173145.glb",
+    "metadata": {
+      "tags": [
+        "floating",
+        "crystal",
+        "city",
+        "clouds"
+      ]
+    }
+  }
+}
