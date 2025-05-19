@@ -15,5 +15,23 @@
         "clouds"
       ]
     }
+  },
+  "d1c13892-a049-4333-baa4-04dfe545593a": {
+    "id": "d1c13892-a049-4333-baa4-04dfe545593a",
+    "timestamp": 1747616161.089646,
+    "date": "2025-05-18 17:56:01",
+    "original_prompt": "A futuristic city with floating skyscrapers and flying vehicles",
+    "enhanced_prompt": "A futuristic city with floating skyscrapers and flying vehicles, with mechanical and electronic elements, showing advanced technological details, cinematic composition, trending on artstation, octane render",
+    "image_path": "datastore/images/img_d1c13892-a049-4333-baa4-04dfe545593a_20250518175601.png",
+    "model_path": "datastore/models/model_d1c13892-a049-4333-baa4-04dfe545593a_20250518175601.glb",
+    "metadata": {
+      "tags": [
+        "futuristic",
+        "city",
+        "floating",
+        "skyscrapers",
+        "flying"
+      ]
+    }
   }
 }

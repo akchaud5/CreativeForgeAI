@@ -21,18 +21,29 @@ The application consists of the following components:
 - **Openfabric Integration**: Connects to Openfabric apps for image and 3D model generation
 - **Memory System**: Stores and retrieves creations with both short-term and long-term memory
 - **File Manager**: Handles storage and retrieval of binary data (images and 3D models)
+- **Web Interface**: User-friendly Streamlit interface for interacting with the pipeline
 
 ## 📋 Requirements
 
 - Python 3.8+
 - Openfabric SDK
+- Streamlit (for web interface)
 - Access to Openfabric apps:
   - Text-to-Image (App ID: `f0997a01-d6d3-a5fe-53d8-561300318557`)
   - Image-to-3D (App ID: `69543f29-4d41-4afc-7f29-3d51591f11eb`)
 
 ## 🚀 Getting Started
 
-### Running Locally
+### Running the Web Interface
+
+1. Clone the repository
+2. Run the web app script:
+   ```
+   ./run_web_app.sh
+   ```
+3. A browser window will open with the interactive Streamlit interface
+
+### Running the API Locally
 
 1. Clone the repository
 2. Navigate to the `app` directory
@@ -55,7 +66,22 @@ The application consists of the following components:
 
 ## 🧪 Usage
 
-### Creating an Image and 3D Model
+### Web Interface
+
+The web interface provides a user-friendly way to interact with the pipeline:
+
+1. **Creation Tab**:
+   - Enter your prompt in the text area
+   - Click "Generate" to create an image and 3D model
+   - View the results and download the 3D model
+
+2. **Search Tab**:
+   - Enter a search query to find past creations
+   - Browse through results with details and media
+
+### API Usage
+
+#### Creating an Image and 3D Model
 
 Send a POST request to the `/execution` endpoint with a prompt:
 
@@ -79,7 +105,7 @@ The response will contain paths to the generated image and 3D model:
 }
 ```
 
-### Retrieving Past Creations
+#### Retrieving Past Creations
 
 Send queries like:
 
@@ -156,35 +182,28 @@ The LLM enhancer:
 
 ```
 app/
-├── config/
-│   ├── execution.json      # Execution configuration
-│   ├── manifest.json       # App manifest
-│   ├── properties.json     # Properties configuration
-│   └── state.json          # State configuration
-├── core/
-│   ├── __init__.py
-│   ├── file_manager.py     # Manages image and model files
-│   ├── llm_enhancer.py     # Local LLM integration
-│   ├── memory_manager.py   # Memory system implementation
-│   ├── memory_query.py     # Handles memory queries
-│   ├── remote.py           # Openfabric remote communication
-│   └── stub.py             # Openfabric app integration
-├── datastore/
-│   ├── images/             # Stored images
-│   ├── memory.json         # Persistent memory
-│   ├── models/             # Stored 3D models
-│   └── tokens.json         # Authentication tokens
-├── ignite.py               # Application ignition
-├── main.py                 # Main application logic
-├── ontology_*/             # Auto-generated schemas
-└── start.sh                # Startup script
+├── config/                # Application configuration
+├── core/                  # Core functionality
+│   ├── file_manager.py    # Manages image and model files
+│   ├── llm_enhancer.py    # LLM prompt enhancement
+│   ├── memory_manager.py  # Memory storage and retrieval
+│   ├── memory_query.py    # Memory query processing
+│   ├── remote.py          # Remote API communication
+│   └── stub.py            # Openfabric SDK integration
+├── datastore/             # Data storage directory
+├── ontology_*/            # Auto-generated schemas
+├── openfabric_pysdk/      # Mocked Openfabric SDK
+├── main.py                # Main application entry point
+├── web_app.py             # Streamlit web interface
+├── test_memory.py         # Memory system tests
+├── test_pipeline.py       # Pipeline tests
+└── simple_test.py         # Simple test harness
 ```
 
 ## 🔮 Future Enhancements
 
-- GUI interface with Streamlit or Gradio
 - FAISS/ChromaDB for semantic similarity search
-- Local 3D model viewer
+- Local 3D model viewer with interactive controls
 - Voice-to-text interaction
 - Fine-tuning options for the image and 3D generation
 
@@ -196,3 +215,4 @@ This project is provided as-is without any warranties. Use at your own risk.
 
 - Openfabric for providing the AI app infrastructure
 - The open-source community for inspiration and tools
+- Streamlit for the interactive web interface

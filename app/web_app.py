@@ -16,7 +16,7 @@ import streamlit as st
 
 # Import our pipeline components
 from core.llm_enhancer import get_llm_enhancer
-from core.memory_manager import get_memory_manager
+from core.memory_manager import get_memory_manager, MemoryEntry
 from core.file_manager import get_file_manager
 from core.memory_query import get_memory_query_handler
 from core.stub import Stub
@@ -71,7 +71,7 @@ def process_creation(prompt):
     stub = Stub(config.app_ids)
     
     # Create a new memory entry
-    memory_entry = memory_manager.MemoryEntry(original_prompt=prompt)
+    memory_entry = MemoryEntry(original_prompt=prompt)
     
     # Enhance prompt with LLM
     try:
