@@ -1,4 +1,4 @@
-# 🚀 Creative AI Pipeline
+# 🚀 CreativeForge AI: Text to 3D Pipeline
 
 A powerful end-to-end application that transforms text prompts into images and 3D models using Openfabric's AI apps and a local LLM.
 
@@ -17,7 +17,10 @@ This application creates a complete pipeline that:
 The application consists of the following components:
 
 - **Main Application (`main.py`)**: Orchestrates the entire process and handles user inputs/outputs
-- **LLM Enhancer**: Local language model integration for prompt enhancement
+- **LLM Enhancer**: Multiple options for prompt enhancement:
+  - Simulated LLM (rule-based enhancer)
+  - Real DeepSeek 6.7B LLM integration
+  - Lightweight rule-based alternative (low memory usage)
 - **Openfabric Integration**: Connects to Openfabric apps for image and 3D model generation
 - **Memory System**: Stores and retrieves creations with both short-term and long-term memory
 - **File Manager**: Handles storage and retrieval of binary data (images and 3D models)
@@ -28,6 +31,7 @@ The application consists of the following components:
 - Python 3.8+
 - Openfabric SDK
 - Streamlit (for web interface)
+- PyTorch and Transformers (for DeepSeek LLM option)
 - Access to Openfabric apps:
   - Text-to-Image (App ID: `f0997a01-d6d3-a5fe-53d8-561300318557`)
   - Image-to-3D (App ID: `69543f29-4d41-4afc-7f29-3d51591f11eb`)
@@ -36,12 +40,33 @@ The application consists of the following components:
 
 ### Running the Web Interface
 
-1. Clone the repository
-2. Run the web app script:
+You have three options for running the web interface:
+
+#### 1. Simulated LLM (Default)
+```
+./run_web_app.sh
+```
+
+#### 2. Real DeepSeek LLM (Requires 16GB+ RAM or GPU)
+```
+./run_web_app_real_llm.sh
+```
+
+#### 3. Lightweight Rule-Based (For Low-Memory Environments)
+```
+./run_web_app_lite.sh
+```
+
+### Running with Google Colab
+
+For powerful GPU acceleration without local hardware requirements:
+
+1. Create a new Colab notebook and clone the repository
+2. Install dependencies:
+   ```python
+   !pip install transformers accelerate bitsandbytes torch streamlit
    ```
-   ./run_web_app.sh
-   ```
-3. A browser window will open with the interactive Streamlit interface
+3. Run the app with ngrok or Colab's built-in port forwarding
 
 ### Running the API Locally
 
@@ -168,36 +193,52 @@ The application features a sophisticated memory system:
   - "Find dragons with sunset"
   - "Get my last 3 models"
 
-## 🔍 LLM Integration
+## 🔍 LLM Integration Options
 
-The application includes a simulated local LLM for prompt enhancement. In a production environment, this would be replaced with a real local LLM like DeepSeek or LLaMA.
+### 1. Simulated LLM (Default)
 
-The LLM enhancer:
-- Analyzes the input prompt
-- Determines the appropriate category (landscape, person, object, etc.)
-- Adds relevant descriptive details and style enhancements
-- Improves the quality of generated images
+- Lightweight rule-based system that simulates an LLM
+- Suitable for any system with minimal resource requirements
+- Categorizes prompts and adds relevant enhancements
+
+### 2. DeepSeek LLM (Advanced)
+
+- Integrates DeepSeek 6.7B instruct model for high-quality prompt enhancement
+- Provides more creative and contextual prompt expansions
+- Requires significant RAM (16GB+) or a GPU
+- Uses 4-bit quantization to reduce memory requirements
+
+### 3. Lightweight Rule-Based (Low-Memory)
+
+- Optimized version for systems with limited memory
+- Uses templates and randomized enhancements
+- Provides good results without large model overhead
+- Perfect for deployment on resource-constrained environments
 
 ## 📂 Project Structure
 
 ```
 app/
-├── config/                # Application configuration
-├── core/                  # Core functionality
-│   ├── file_manager.py    # Manages image and model files
-│   ├── llm_enhancer.py    # LLM prompt enhancement
-│   ├── memory_manager.py  # Memory storage and retrieval
-│   ├── memory_query.py    # Memory query processing
-│   ├── remote.py          # Remote API communication
-│   └── stub.py            # Openfabric SDK integration
-├── datastore/             # Data storage directory
-├── ontology_*/            # Auto-generated schemas
-├── openfabric_pysdk/      # Mocked Openfabric SDK
-├── main.py                # Main application entry point
-├── web_app.py             # Streamlit web interface
-├── test_memory.py         # Memory system tests
-├── test_pipeline.py       # Pipeline tests
-└── simple_test.py         # Simple test harness
+├── config/                    # Application configuration
+├── core/                      # Core functionality
+│   ├── file_manager.py        # Manages image and model files
+│   ├── llm_enhancer.py        # Simulated LLM prompt enhancement
+│   ├── real_llm_enhancer.py   # DeepSeek LLM integration
+│   ├── lite_llm_enhancer.py   # Lightweight rule-based enhancer
+│   ├── memory_manager.py      # Memory storage and retrieval
+│   ├── memory_query.py        # Memory query processing
+│   ├── remote.py              # Remote API communication
+│   └── stub.py                # Openfabric SDK integration
+├── datastore/                 # Data storage directory
+├── ontology_*/                # Auto-generated schemas
+├── openfabric_pysdk/          # Mocked Openfabric SDK
+├── main.py                    # Main application entry point
+├── web_app.py                 # Streamlit web interface (simulated LLM)
+├── web_app_real_llm.py        # Streamlit web interface with DeepSeek
+├── web_app_lite.py            # Streamlit web interface (low memory)
+├── test_memory.py             # Memory system tests
+├── test_pipeline.py           # Pipeline tests
+└── simple_test.py             # Simple test harness
 ```
 
 ## 🔮 Future Enhancements
@@ -206,6 +247,8 @@ app/
 - Local 3D model viewer with interactive controls
 - Voice-to-text interaction
 - Fine-tuning options for the image and 3D generation
+- API key configuration management
+- Additional LLM options (Llama, Mistral, etc.)
 
 ## 📄 License
 
@@ -214,5 +257,6 @@ This project is provided as-is without any warranties. Use at your own risk.
 ## 🙏 Acknowledgements
 
 - Openfabric for providing the AI app infrastructure
+- DeepSeek AI for the open-source LLM model
 - The open-source community for inspiration and tools
 - Streamlit for the interactive web interface
