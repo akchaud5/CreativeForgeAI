@@ -15,6 +15,9 @@ from typing import Dict, List, Optional
 
 import streamlit as st
 
+# Import the voice to text component
+from voice_to_text import voice_input_area
+
 # Import our pipeline components
 from core.memory_manager import get_memory_manager, MemoryEntry
 from core.file_manager import get_file_manager
@@ -219,14 +222,28 @@ def main():
     # Creation tab
     with tab1:
         st.markdown("""
-        Enter a descriptive prompt, and the AI will:
+        Enter or speak a descriptive prompt, and the AI will:
         1. Enhance it with a rule-based system
         2. Generate an image
         3. Convert the image to a 3D model
         """)
         
-        prompt = st.text_area("Your prompt:", height=100, 
-                            placeholder="Example: A floating crystal city in the clouds")
+        # Add input method selector
+        input_method = st.radio(
+            "Input method:",
+            options=["Text", "Voice"],
+            horizontal=True
+        )
+        
+        if input_method == "Text":
+            prompt = st.text_area("Your prompt:", height=100, 
+                                placeholder="Example: A floating crystal city in the clouds")
+        else:
+            prompt = voice_input_area(
+                label="Your prompt (voice):",
+                placeholder="Click to speak your prompt",
+                key="voice_prompt"
+            )
         
         if st.button("Generate", key="generate_button"):
             if not prompt:
@@ -278,7 +295,22 @@ def main():
         - "Get my last 3 creations"
         """)
         
-        search_prompt = st.text_input("Search prompt:", placeholder="Example: Find my recent creations")
+        # Add input method selector for search
+        search_input_method = st.radio(
+            "Search input method:",
+            options=["Text", "Voice"],
+            horizontal=True,
+            key="search_input_method"
+        )
+        
+        if search_input_method == "Text":
+            search_prompt = st.text_input("Search prompt:", placeholder="Example: Find my recent creations")
+        else:
+            search_prompt = voice_input_area(
+                label="Search with voice:",
+                placeholder="Click to speak your search",
+                key="voice_search"
+            )
         
         if st.button("Search", key="search_button"):
             if not search_prompt:
@@ -353,6 +385,11 @@ def main():
         The prompt enhancer applies artistic styles, lighting,
         and composition elements based on the type of content
         in your prompt.
+        
+        **Features**:
+        - Text input
+        - Voice input (uses browser's Speech Recognition API)
+        - Memory search and retrieval
         """
     )
     

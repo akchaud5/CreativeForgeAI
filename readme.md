@@ -24,7 +24,7 @@ The application consists of the following components:
 - **Openfabric Integration**: Connects to Openfabric apps for image and 3D model generation
 - **Memory System**: Stores and retrieves creations with both short-term and long-term memory
 - **File Manager**: Handles storage and retrieval of binary data (images and 3D models)
-- **Web Interface**: User-friendly Streamlit interface for interacting with the pipeline
+- **Web Interface**: User-friendly Streamlit interface for interacting with the pipeline, including voice input capability
 
 ## 📋 Requirements
 
@@ -96,12 +96,14 @@ For powerful GPU acceleration without local hardware requirements:
 The web interface provides a user-friendly way to interact with the pipeline:
 
 1. **Creation Tab**:
-   - Enter your prompt in the text area
+   - Enter your prompt in the text area or use voice input
+   - Choose between text or voice input with the radio buttons
    - Click "Generate" to create an image and 3D model
    - View the results and download the 3D model
 
 2. **Search Tab**:
-   - Enter a search query to find past creations
+   - Enter a search query using text or voice input
+   - Toggle between input methods with the radio buttons
    - Browse through results with details and media
 
 ### API Usage
@@ -245,7 +247,7 @@ app/
 
 - FAISS/ChromaDB for semantic similarity search
 - Local 3D model viewer with interactive controls
-- Voice-to-text interaction
+- ✅ Voice-to-text interaction (implemented)
 - Fine-tuning options for the image and 3D generation
 - API key configuration management
 - Additional LLM options (Llama, Mistral, etc.)
